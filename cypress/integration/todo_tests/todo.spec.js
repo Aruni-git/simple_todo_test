@@ -1,31 +1,40 @@
 /// <reference types="cypress" />
+
+import {
+  navigate,
+  addTask,
+  validateText,
+  notchecked,
+  checkComplete,
+  itemRemoved
+} from "../page-objects/todo-page"
+
+const newItem = 'Go through cypress tutorial'
+
 beforeEach(() => {
-  const newItem = 'Go through cypress tutorial'
 
-  cy.visit('http://localhost:3000/')
+  navigate()
 
-  cy.get('input', { setTimeout: 5000 }).type(`${newItem}{enter}`)
+  addTask(newItem)
 })
 
 it('add a new task to todo list', () => {
 
-  cy.get('span')
-  cy.should('have.text', 'Go through cypress tutorial')
+ validateText(newItem)
 
-  cy.get('.App-tick').should('not.be.checked')
+ notchecked()
 })
 
 it('mark one task as completed in todo list', () => {
 
-  cy.get('span')
-  cy.should('have.text', 'Go through cypress tutorial')
+  validateText(newItem)
 
-  cy.get('.App-tick').click()
+  checkComplete()
 })
 
 it('verify completed item is removed from the todo list', () => {
-  cy.get('.App-tick').click()
 
-  cy.get('ol')
-  cy.contains('Go through cypress tutorial').should('not.exist')
+  checkComplete()
+
+  itemRemoved()
 })
