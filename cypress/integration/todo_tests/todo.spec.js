@@ -22,3 +22,10 @@ it('mark one task as completed in todo list', () => {
 
   cy.get('.App-tick').click()
 })
+
+it('verify completed item is removed from the todo list', () => {
+  cy.get('.App-tick').click()
+
+  cy.get('ol')
+  cy.contains('Go through cypress tutorial').should('not.exist')
+})
