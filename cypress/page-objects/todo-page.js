@@ -1,7 +1,7 @@
 
 export function navigate() {
 
-    cy.visit('http://localhost:3000/')
+    cy.visit('http://localhost:3000/',{ setTimeout: 5000 })
 }
 
 export function addTask(taskName) {
